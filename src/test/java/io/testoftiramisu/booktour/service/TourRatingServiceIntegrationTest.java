@@ -1,5 +1,6 @@
 package io.testoftiramisu.booktour.service;
 
+import io.testoftiramisu.booktour.BooktourApplication;
 import io.testoftiramisu.booktour.domain.TourRating;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -13,11 +14,10 @@ import java.util.List;
 import java.util.NoSuchElementException;
 
 import static org.hamcrest.CoreMatchers.is;
-import static org.junit.Assert.assertThat;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 @RunWith(SpringRunner.class)
-@SpringBootTest
+@SpringBootTest(classes= BooktourApplication.class)
 @Transactional
 public class TourRatingServiceIntegrationTest {
   private static final int CUSTOMER_ID = 456;
@@ -115,7 +115,7 @@ public class TourRatingServiceIntegrationTest {
   // Happy Path get average score of a Tour.
   @Test
   public void getAverageScore() {
-    assertTrue(service.getAverageScore(TOUR_ID) == 4.0);
+    assertThat(service.getAverageScore(TOUR_ID), is(5.0));
   }
 
   // UnHappy Path, Tour NOT_A_TOUR_ID does not exist
